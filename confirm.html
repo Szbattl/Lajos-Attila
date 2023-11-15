@@ -1,0 +1,30 @@
+<!-- ... -->
+<div id="confirmation">
+  <h2>Foglalás ellenőrzése</h2>
+  <div id="selectedDate"></div>
+  <div id="bookingDetails"></div>
+  <button id="editBtn">Mezők szerkesztése</button>
+  <button id="finalizeBtn">Foglalás véglegesítése</button>
+</div>
+<!-- ... -->
+
+<script>
+$(document).ready(function() {
+  var selectedDateText = localStorage.getItem("selectedDateText");
+  var bookingDetails = localStorage.getItem("bookingDetails");
+
+  if (selectedDateText && bookingDetails) {
+    $("#selectedDate").text(selectedDateText);
+    $("#bookingDetails").text(bookingDetails);
+
+    $("#editBtn").on("click", function() {
+      window.location.href = "foglalas.html"; // Visszatérés az első oldalra
+    });
+
+    $("#finalizeBtn").on("click", function() {
+      // Ide add hozzá a kódodat a szervernek való adatküldéshez
+      alert("Foglalás véglegesítve és elküldve a szervernek!");
+    });
+  }
+});
+</script>

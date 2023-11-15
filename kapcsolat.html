@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapcsolat</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+<body>
+   <header>
+    <nav>
+      <ul>
+        <li><a href="fooldal.html"><img src="logo.png" alt="Aqua-Vital Prémium Apartman" class="logo"></a></li>
+        <li><a href="fooldal.html">Főoldal</a></li>
+        <li><a href="apartmanok.html">Apartmanok</a></li>
+        <li><a href="kapcsolat.html">Kapcsolat</a></li>
+        <li><a href="latnivalok.html">Látnivalók</a></li>
+        <li><a href="foglalas.html">Foglalás</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  </header>
+    <script>
+  function validateForm() {
+    var name = document.forms["contactForm"]["name"].value;
+    var email = document.forms["contactForm"]["email"].value;
+    var phone = document.forms["contactForm"]["phone"].value;
+    var message = document.forms["contactForm"]["message"].value;
+
+    if (name === "" || email === "" || phone === "" || message === "") {
+      alert("Kérlek töltsd ki az összes kötelező mezőt!");
+      return false;
+    }
+
+    // Elküldjük az űrlap adatait a szervernek
+    sendDataToServer(name, email, phone, message);
+
+    return true;
+  }
+
+  function sendDataToServer(name, email, phone, message) {
+    // Elküldjük az űrlap adatait a szervernek
+    fetch('/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, phone, message }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        // További kezelési logika
+      })
+      .catch((error) => {
+        console.error('Hiba történt:', error);
+      });
+  }
+    </script>
+
+    
+    <h1>Kapcsolat</h1>
+
+    <div>
+        <!-- Google Térkép beágyazása -->
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2697.8837483127!2d21.390867176658425!3d47.45320549855722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474719829bd52e1b%3A0x7774fd75b533ff4e!2sAqua-Vital%20Premium%20Apartmanok*2A*2A*2A!5e0!3m2!1shu!2shu!4v1698172280772!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div>
+        <!-- Elérhetőségi információk -->
+        <p>Telefon: +36-20-801-9884</p>
+        <p>E-mail: <a href="mailto:aquavitalapartman@gmail.com">aquavitalapartman@gmail.com</a></p>
+    </div>
+
+    <div>
+        <!-- Űrlap az üzenet küldéséhez -->
+        <form name="contactForm" onsubmit="return validateForm()" action="mailto:aquavitalapartman@gmail.com" method="post">
+            <label for="name">Név:</label>
+            <input type="text" id="kapnev" name="name" required><br>
+
+            <label for="email">E-mail cím:</label>
+            <input type="email" id="kapemail" name="email" required><br>
+
+            <label for="phone">Telefonszám:</label>
+            <input type="tel" id="kaphone" name="phone" required><br>
+
+            <label for="message">Üzenet:</label>
+            <textarea id="kapmessage" name="message" rows="4" required></textarea><br>
+
+            <input  id="kapkuld"type="submit" value="Küldés">
+        </form>
+    </div>
+
+  <footer>
+    &copy; 2023 Aqua-Vital Prémium Apartman. Created by Attila&Lajos
+  </footer>
+</body>
+</html>
